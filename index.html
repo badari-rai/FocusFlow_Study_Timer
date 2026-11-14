@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow — Study Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">✦</div>
+        <div>
+          <h1>FocusFlow</h1>
+          <span>Study smarter. Stay focused.</span>
+        </div>
+      </div>
+      <button id="themeBtn" class="icon-btn" title="Toggle theme">☾</button>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">YOUR STUDY SPACE</p>
+        <h2 id="greeting">Ready to focus?</h2>
+        <p class="subtext">One focused session at a time.</p>
+      </div>
+      <div class="date-card">
+        <span id="dayName">Friday</span>
+        <strong id="dateText">23 October 2026</strong>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <div class="main-column">
+        <div class="timer-card glass">
+          <div class="timer-top">
+            <div class="mode-tabs">
+              <button class="mode active" data-mode="study">Study</button>
+              <button class="mode" data-mode="short">Short Break</button>
+              <button class="mode" data-mode="long">Long Break</button>
+            </div>
+            <div class="session-pill"><span class="dot"></span> <span id="sessionLabel">Focus session</span></div>
+          </div>
+
+          <div class="timer-wrap">
+            <svg class="progress-ring" viewBox="0 0 300 300">
+              <circle class="ring-bg" cx="150" cy="150" r="128"></circle>
+              <circle id="ring" class="ring" cx="150" cy="150" r="128"></circle>
+            </svg>
+            <div class="timer-content">
+              <span id="timerMode">STUDY</span>
+              <div id="timer">50:00</div>
+              <small id="timerHint">Deep work</small>
+            </div>
+          </div>
+
+          <div class="timer-controls">
+            <button id="resetBtn" class="control secondary">↻</button>
+            <button id="startBtn" class="control primary">▶ Start</button>
+            <button id="skipBtn" class="control secondary">→</button>
+          </div>
+
+          <div class="timer-settings">
+            <label>Study
+              <select id="studyLength">
+                <option value="25">25 min</option>
+                <option value="50" selected>50 min</option>
+                <option value="60">60 min</option>
+                <option value="90">90 min</option>
+              </select>
+            </label>
+            <label>Break
+              <select id="breakLength">
+                <option value="5" selected>5 min</option>
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat glass">
+            <div class="stat-icon">⏱</div>
+            <div><span>Today</span><strong id="todayTime">0m</strong></div>
+          </div>
+          <div class="stat glass">
+            <div class="stat-icon">✓</div>
+            <div><span>Sessions</span><strong id="sessions">0</strong></div>
+          </div>
+          <div class="stat glass">
+            <div class="stat-icon">🔥</div>
+            <div><span>Streak</span><strong id="streak">1 day</strong></div>
+          </div>
+        </div>
+
+        <div class="card glass">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">PLAN</p>
+              <h3>Today's Tasks</h3>
+            </div>
+            <span id="taskCount" class="count">0/0</span>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <input id="taskInput" type="text" placeholder="What do you want to study?" maxlength="80" required>
+            <select id="taskSubject">
+              <option>DSA</option>
+              <option>DBMS</option>
+              <option>Probability</option>
+              <option>Web Development</option>
+              <option>Other</option>
+            </select>
+            <button type="submit">＋ Add</button>
+          </form>
+
+          <div id="taskList" class="task-list"></div>
+        </div>
+      </div>
+
+      <aside class="side-column">
+        <div class="card glass goal-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">DAILY TARGET</p>
+              <h3>Study Goal</h3>
+            </div>
+            <span class="goal-emoji">🎯</span>
+          </div>
+
+          <div class="goal-number">
+            <strong id="goalMinutes">4h</strong>
+            <span>today</span>
+          </div>
+
+          <div class="progress-line">
+            <div id="goalProgress"></div>
+          </div>
+          <div class="goal-meta">
+            <span id="goalDone">0 min completed</span>
+            <span id="goalPercent">0%</span>
+          </div>
+
+          <label class="goal-select">Daily goal
+            <select id="goalLength">
+              <option value="120">2 hours</option>
+              <option value="180">3 hours</option>
+              <option value="240" selected>4 hours</option>
+              <option value="300">5 hours</option>
+              <option value="360">6 hours</option>
+              <option value="480">8 hours</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="card glass quote-card">
+          <span class="quote-mark">“</span>
+          <p id="quote">Small progress is still progress.</p>
+          <span class="quote-author">— FocusFlow</span>
+        </div>
+
+        <div class="card glass subject-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">FOCUS</p>
+              <h3>Subjects</h3>
+            </div>
+          </div>
+          <div class="subjects">
+            <button class="subject active" data-subject="DSA"><span>⌘</span> DSA</button>
+            <button class="subject" data-subject="DBMS"><span>◈</span> DBMS</button>
+            <button class="subject" data-subject="Probability"><span>∿</span> Probability</button>
+            <button class="subject" data-subject="Web Development"><span>◇</span> Web Development</button>
+          </div>
+          <p class="selected-subject">Current: <strong id="currentSubject">DSA</strong></p>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <span>FocusFlow</span>
+      <span>Built with HTML • CSS • JavaScript</span>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast">Session complete ✨</div>
+  <script src="script.js"></script>
+</body>
+</html>
